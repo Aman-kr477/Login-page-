@@ -1,6 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useStore from "../store/useStore";
+import productsApi from "../apis/product";
+import { useEffect, useState } from "react";
 
 const Body = () => {
   const addUser = useStore((state) => state.addUser
@@ -25,6 +27,21 @@ const Body = () => {
       "Phone number is not valid"
     ),
   });
+  
+
+  const fetchProduct=async()=>{
+    try{
+   const response=await productsApi.show();
+   console.log(response);
+    }
+    catch(error){
+ console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+ fetchProduct();
+  },[])
 
   return (
     <section className="p-6">
