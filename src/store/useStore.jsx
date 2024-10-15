@@ -1,39 +1,41 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+
 const useStore = create(
   persist(
     devtools((set) => ({
-      formData: {
-        name: "",
-        email: "",
-        tel: "",
-      },
-      updateFormData: (values) =>
+      users: [], 
+      addUser: (values) =>
         set((state) => {
-          if (
-            state.formData.email === values.email ||
-            state.formData.tel === values.tel
-          ) {
-            alert("User Already exist ");
-            return state;
+          
+          const newEmail = values.email.trim().toLowerCase();
+          const newTel = values.tel.trim();
+
+          // Check if the user with the same email or phone number already exists
+          const existingUser = state.users.some(
+            (user) =>
+              user.email.trim().toLowerCase() === newEmail ||
+              user.tel.trim() === newTel
+          );
+
+          if (existingUser) {
+            alert("User Already exists");
+            return state; // Return current state without any changes
           }
 
+          // If user doesn't exist, add the new user to the array
           return {
-            formData: { ...state.formData, ...values },
+            users: [...state.users, values], // Append new user
           };
         }),
       resetForm: () =>
         set({
-          formData: {
-            name: "",
-            email: "",
-            tel: "",
-          },
+          users: [], // Clear all users (optional)
         }),
     })),
     {
-      name: "form-storage",
-      getStorage: () => localStorage,
+      name: "user-storage",
+      getStorage: () => localStorage, // Persist users in localStorage
     }
   )
 );

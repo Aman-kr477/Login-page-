@@ -3,25 +3,27 @@ import * as Yup from "yup";
 import useStore from "../store/useStore";
 
 const Body = () => {
-  const { formData, updateFormData, resetForm } = useStore((state) => ({
-    formData: state.formData,
-    updateFormData: state.updateFormData,
-    resetForm: state.resetForm,
-  }));
+  const addUser = useStore((state) => state.addUser
+  );
   const initialValues = {
     name: "",
     email: "",
     tel: "",
   };
   const onSubmit = (values, { resetForm }) => {
-    console.log(values);
-    updateFormData(values);
+   
+    addUser(values);
     resetForm();
   };
   const validationSchema = Yup.object({
     name: Yup.string().required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
-    tel: Yup.string().required("Required"),
+    tel:Yup.string()
+    .required("Required")
+    .matches(
+      /^[0-9]{10}$/, 
+      "Phone number is not valid"
+    ),
   });
 
   return (
