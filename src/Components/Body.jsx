@@ -5,8 +5,7 @@ import productsApi from "../apis/product";
 import { useEffect, useState } from "react";
 
 const Body = () => {
-  const addUser = useStore((state) => state.addUser
-  );
+  const addUser = useStore((state) => state.addUser);
   const initialValues = {
     name: "",
     email: "",

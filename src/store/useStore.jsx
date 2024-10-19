@@ -21,6 +21,7 @@ const useStore = create(
           if (existingUser) {
             alert("User Already exists");
             return state; // Return current state without any changes
+            // it will give u what u have push now .
           }
 
           // If user doesn't exist, add the new user to the array
