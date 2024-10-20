@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import useStore from "../store/useStore";
 import productsApi from "../apis/product";
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
 const Body = () => {
   const addUser = useStore((state) => state.addUser);
@@ -14,7 +15,7 @@ const Body = () => {
   const onSubmit = (values, { resetForm }) => {
    
     addUser(values);
-    resetForm();
+    resetForm();// call from formik.
   };
   const validationSchema = Yup.object({
     name: Yup.string().required("Required"),
@@ -27,20 +28,24 @@ const Body = () => {
     ),
   });
   
+  // react -query  function
+     const queryResult=()=>{
+     
+     }
+ queryResult();
+//   const fetchProduct=async()=>{
+//     try{
+//    const response=await productsApi.show();
+//    console.log(response);
+//     }
+//     catch(error){
+//  console.log(error);
+//     }
+//   }
 
-  const fetchProduct=async()=>{
-    try{
-   const response=await productsApi.show();
-   console.log(response);
-    }
-    catch(error){
- console.log(error);
-    }
-  }
-
-  useEffect(()=>{
- fetchProduct();
-  },[])
+//   useEffect(()=>{
+//  fetchProduct();
+//   },[])
 
   return (
     <section className="p-6">
