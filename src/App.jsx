@@ -3,6 +3,9 @@ import './App.css';
 import Header from './Components/Header';
 import Body from './Components/Body';
 import { QueryClientProvider,QueryClient } from 'react-query';
+import {Route,Switch} from "react-router-dom";
+import Home from './Components/Home';
+import ProductPage from './Components/Product';
 
 const queryClient=new QueryClient();
 const App=()=>{
@@ -10,16 +13,13 @@ const App=()=>{
     <QueryClientProvider client={queryClient}>
     <>
     
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-     <div className='rounded-lg shadow-lg w-full max-w-md'>
-     <Header />
-     <Body />
-     </div>
-       
-
-     
-    
-    </div>
+   
+    <Switch>
+    <Route exact component={Header} path="/header"  />
+    <Route  exact component={Body} path="/body"/>
+    <Route exact component={Home} path="/" />
+    <Route exact component={ProductPage} path ="/product"/>
+    </Switch> 
     </>
     </QueryClientProvider>
   )

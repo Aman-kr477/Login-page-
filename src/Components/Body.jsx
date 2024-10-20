@@ -1,9 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useStore from "../store/useStore";
-import productsApi from "../apis/product";
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+
 
 const Body = () => {
   const addUser = useStore((state) => state.addUser);
@@ -28,11 +26,7 @@ const Body = () => {
     ),
   });
   
-  // react -query  function
-     const queryResult=()=>{
-     
-     }
- queryResult();
+  
 //   const fetchProduct=async()=>{
 //     try{
 //    const response=await productsApi.show();
